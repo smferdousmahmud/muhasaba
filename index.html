@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhasasba</title>
+    <style>
+        #calendar {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Muhasaba Calendar</h1>
+    <div id="calendar"></div>
+    <script>
+        function generateCalendar(year, month) {
+            const calendar = document.getElementById('calendar');
+            calendar.innerHTML = '';
+            const date = new Date(year, month, 1);
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"];
+            const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+            let html = '<h2>' + monthNames[month] + ' ' + year + '</h2>';
+            html += '<table>';
+            html += '<tr>';
+            for (let i = 0; i < 7; i++) {
+                html += '<th>' + dayNames[i] + '</th>';
+            }
+            html += '</tr><tr>';
+            let day = 1;
+            for (let i = 0; i < 42; i++) {
+                if (i % 7 === 0 && i !== 0) {
+                    html += '</tr><tr>';
+                }
+                if (i < date.getDay() || day > new Date(year, month + 1, 0).getDate()) {
+                    html += '<td></td>';
+                } else {
+                    html += '<td>' + day + '</td>';
+                    day++;
+                }
+            }
+            html += '</tr></table>';
+            calendar.innerHTML = html;
+        }
+        const now = new Date();
+        generateCalendar(now.getFullYear(), now.getMonth());
+    </script>
+</body>
+</html>
