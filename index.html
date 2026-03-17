@@ -4,24 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Muhasasba</title>
-    <style>
-        #calendar {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+    <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
     <h1>Muhasaba Calendar</h1>
@@ -49,7 +32,9 @@
                 if (i < date.getDay() || day > new Date(year, month + 1, 0).getDate()) {
                     html += '<td></td>';
                 } else {
-                    html += '<td>' + day + '</td>';
+                    const isToday = year === now.getFullYear() && month === now.getMonth() && day === now.getDate();
+                    const classAttr = isToday ? ' class="today"' : '';
+                    html += '<td' + classAttr + '>' + day + '</td>';
                     day++;
                 }
             }
