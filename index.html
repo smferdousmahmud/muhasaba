@@ -8,6 +8,29 @@
 </head>
 <body>
     <h1>Muhasaba Calendar</h1>
+    <div class="debt-panel">
+        <form id="add-debt-form">
+            <h3>Add Debt</h3>
+            <div class="field">
+                <label for="creditor">Creditor</label>
+                <input id="creditor" name="creditor" type="text" required>
+            </div>
+            <div class="field">
+                <label for="amount">Amount</label>
+                <input id="amount" name="amount" type="number" step="0.01" required>
+            </div>
+            <div class="field">
+                <label for="filter">Filter</label>
+                <select id="filter" name="filter">
+                    <option value="yes">Yes</option>
+                    <option value="no" selected>No</option>
+                </select>
+            </div>
+            <div class="actions">
+                <button type="submit">Add</button>
+            </div>
+        </form>
+    </div>
     <div id="calendar"></div>
     <script>
         function generateCalendar(year, month) {
@@ -43,6 +66,21 @@
         }
         const now = new Date();
         generateCalendar(now.getFullYear(), now.getMonth());
+        // Add-debt form handling
+        const addDebtForm = document.getElementById('add-debt-form');
+        if (addDebtForm) {
+            addDebtForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const data = {
+                    creditor: document.getElementById('creditor').value,
+                    amount: parseFloat(document.getElementById('amount').value || 0),
+                    filter: document.getElementById('filter').value
+                };
+                console.log('Add debt:', data);
+                alert('Debt added: ' + data.creditor + ' — ' + data.amount + ' (filter: ' + data.filter + ')');
+                addDebtForm.reset();
+            });
+        }
     </script>
 </body>
 </html>
