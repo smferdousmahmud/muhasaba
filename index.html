@@ -63,6 +63,10 @@
             }
             html += '</tr></table>';
             calendar.innerHTML = html;
+            // trigger a short fade-in animation each time the calendar is regenerated
+            calendar.classList.remove('fade-in');
+            void calendar.offsetWidth;
+            calendar.classList.add('fade-in');
         }
         const now = new Date();
         generateCalendar(now.getFullYear(), now.getMonth());
